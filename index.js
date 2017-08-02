@@ -35,22 +35,22 @@ app.use(session({
 app.use(flash());
 // 设置模板全局常量
 app.locals.blog = {
-  title: pkg.name,
-  description: pkg.description
+    title: pkg.name,
+    description: pkg.description
 };
 
 // 添加模板必需的三个变量
 app.use(function (req, res, next) {
-  res.locals.user = req.session.user;
-  res.locals.success = req.flash('success').toString();
-  res.locals.error = req.flash('error').toString();
-  next();
+    res.locals.user = req.session.user;
+    res.locals.success = req.flash('success').toString();
+    res.locals.error = req.flash('error').toString();
+    next();
 });
 
 // 处理表单及文件上传的中间件
 app.use(require('express-formidable')({
-  uploadDir: path.join(__dirname, 'public/img'),// 上传文件目录
-  keepExtensions: true// 保留后缀
+    uploadDir: path.join(__dirname, 'public/img'),// 上传文件目录
+    keepExtensions: true// 保留后缀
 }));
 
 // 正常请求的日志
@@ -65,9 +65,7 @@ app.use(expressWinston.logger({
     })
   ]
 }));
-
 routes(app);
-
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [
@@ -80,7 +78,6 @@ app.use(expressWinston.errorLogger({
     })
   ]
 }));
-
-app.listen(config.port, function() {
+app.listen(config.port, function () {
     console.log(`${pkg.name} listening on port ${config.port}`);
 })
